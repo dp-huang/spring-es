@@ -1,28 +1,13 @@
-package com.spring.es.models;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
+package com.spring.es.dao;
 
 /**
  * @author huangd7
  */
-@Document(indexName = "article", type = "article")
-public class Article {
-
-    @Id
-    private String id;
+public class CreateArticleRequest {
 
     private String title;
 
     private String description;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
