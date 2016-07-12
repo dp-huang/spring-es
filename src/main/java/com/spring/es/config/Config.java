@@ -4,8 +4,6 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.node.NodeBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,11 +14,7 @@ import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-import java.io.IOException;
 import java.net.InetAddress;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * @author huangd7
@@ -30,18 +24,24 @@ import java.nio.file.Paths;
 @ComponentScan(basePackages = {"com.spring.es.services"})
 public class Config {
 
-    @Value("${elasticsearch.home:/usr/local/Cellar/elasticsearch/2.3.1}")
-    private String elasticsearchHome;
-
     private static Logger logger = LoggerFactory.getLogger(Config.class);
+
+    @Value("${spring.data.elasticsearch.cluster}")
+    private String clusterName;
+
+    @Value("${spring.data.elasticsearch.host}")
+    private String host;
+
+    @Value("${spring.data.elasticsearch.port}")
+    private int port;
 
     @Bean
     public Client client() {
         try {
             Settings settings = Settings.settingsBuilder()
-                    .put("cluster.name", "elasticsearch_huangd7").build();
+                    .put("cluster.name", clusterName).build();
             Client client = TransportClient.builder().settings(settings).build()
-                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("localhost"), 9300));
+                    .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName(host), port));
 
             return client;
         } catch (Exception e) {

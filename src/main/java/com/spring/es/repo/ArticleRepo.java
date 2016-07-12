@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ArticleRepo extends ElasticsearchRepository<Article, String> {
 
-    @Query("{\"bool\": {\"must\": [{\"match\": {\"title\": \"?0\"}}]}}")
+    @Query("{\"bool\": {\"should\": [{\"term\": {\"title\": \"?0\"}}]}}")
     Page<Article> findByTitle(String title, Pageable pageable);
 
 }

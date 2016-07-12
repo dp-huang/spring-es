@@ -2,9 +2,11 @@ package com.spring.es.services;
 
 import com.spring.es.dao.CreateArticleRequest;
 import com.spring.es.dao.CreateArticleResponse;
+import com.spring.es.dao.SearchArticleResponse;
 import com.spring.es.models.Article;
 import com.spring.es.repo.ArticleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +22,9 @@ public class SearchServiceImpl implements SearchService {
     private ArticleRepo articleRepo;
 
     @Override
-    public String search(String keyword, Pageable pageable) {
-        articleRepo.findByTitle(keyword, pageable);
-        return "";
+    public SearchArticleResponse search(String keyword, Pageable pageable) {
+        Page<Article> articles = articleRepo.findByTitle(keyword, pageable);
+        return new SearchArticleResponse(articles);
     }
 
     @Override
@@ -34,6 +36,6 @@ public class SearchServiceImpl implements SearchService {
 
         Article saved = articleRepo.save(article);
 
-        return null;
+        return new CreateArticleResponse(saved);
     }
 }

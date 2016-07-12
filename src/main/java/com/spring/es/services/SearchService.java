@@ -2,6 +2,7 @@ package com.spring.es.services;
 
 import com.spring.es.dao.CreateArticleRequest;
 import com.spring.es.dao.CreateArticleResponse;
+import com.spring.es.dao.SearchArticleResponse;
 import org.springframework.data.domain.Pageable;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface SearchService {
 
-    String search(String keyword, Pageable pageable);
+    SearchArticleResponse search(String keyword, Pageable pageable);
 
     CreateArticleResponse createDocument(CreateArticleRequest request);
 }

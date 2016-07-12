@@ -2,13 +2,11 @@ package com.spring.es.controllers;
 
 import com.spring.es.dao.CreateArticleRequest;
 import com.spring.es.dao.CreateArticleResponse;
+import com.spring.es.dao.SearchArticleResponse;
 import com.spring.es.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author huangd7
@@ -25,7 +23,7 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(String keyword, Pageable pageable) {
+    public SearchArticleResponse search(@RequestParam("keyword") String keyword, Pageable pageable) {
         return searchService.search(keyword, pageable);
     }
 
