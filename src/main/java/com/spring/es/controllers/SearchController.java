@@ -1,8 +1,8 @@
 package com.spring.es.controllers;
 
-import com.spring.es.dao.CreateArticleRequest;
-import com.spring.es.dao.CreateArticleResponse;
-import com.spring.es.dao.SearchArticleResponse;
+import com.spring.es.dto.CreateArticleRequest;
+import com.spring.es.dto.CreateArticleResponse;
+import com.spring.es.dto.SearchArticleResponse;
 import com.spring.es.services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;

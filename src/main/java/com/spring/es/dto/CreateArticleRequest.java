@@ -1,4 +1,4 @@
-package com.spring.es.dao;
+package com.spring.es.dto;
 
 /**
  * @author huangd7
